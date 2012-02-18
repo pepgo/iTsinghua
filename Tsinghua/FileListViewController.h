@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "THUViewController.h"
-#import "DownloadManager.h"
+#import "THUDownloadManager.h"
 
 // @since   1.0.3
 @interface FileListViewController : THUViewController {

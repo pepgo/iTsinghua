@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		32A665E114752C9500CE27FC /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A665E014752C9500CE27FC /* DownloadManager.m */; };
+		322934B514EFED1800FD2B1E /* THUNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 322934AE14EFED1800FD2B1E /* THUNetworkManager.m */; };
+		322934B614EFED1800FD2B1E /* THUDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 322934B014EFED1800FD2B1E /* THUDownloadManager.m */; };
+		322934B714EFED1800FD2B1E /* THUFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 322934B214EFED1800FD2B1E /* THUFileManager.m */; };
+		322934B814EFED1800FD2B1E /* THUAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 322934B414EFED1800FD2B1E /* THUAccountManager.m */; };
+		322934BB14EFF00000FD2B1E /* THUTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 322934BA14EFF00000FD2B1E /* THUTabBarController.m */; };
 		32ABBF9B146BFCEA004829EF /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32ABBF99146BFCEA004829EF /* HelpViewController.m */; };
 		32ABBF9C146BFCEA004829EF /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32ABBF9A146BFCEA004829EF /* HelpViewController.xib */; };
 		32EA72EA1462B3C4003F1095 /* THUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EA72E91462B3C4003F1095 /* THUViewController.m */; };
@@ -43,7 +47,6 @@
 		DD4F05641451DAFD000FBD02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD4F054B1451DAFD000FBD02 /* Foundation.framework */; };
 		DD4F056C1451DAFD000FBD02 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4F056A1451DAFD000FBD02 /* InfoPlist.strings */; };
 		DD4F056F1451DAFD000FBD02 /* TsinghuaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F056E1451DAFD000FBD02 /* TsinghuaTests.m */; };
-		DD4F05841451DB78000FBD02 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F05831451DB78000FBD02 /* NetworkManager.m */; };
 		DD4F058B1451E885000FBD02 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F05891451E885000FBD02 /* LoginViewController.m */; };
 		DD4F058C1451E885000FBD02 /* LoginViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD4F058A1451E885000FBD02 /* LoginViewController_iPhone.xib */; };
 		DD5F115B149E444000685E11 /* homework_aloff.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5F114F149E444000685E11 /* homework_aloff.png */; };
@@ -135,8 +138,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		32A665DF14752C9500CE27FC /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
-		32A665E014752C9500CE27FC /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
+		322934AD14EFED1800FD2B1E /* THUNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THUNetworkManager.h; sourceTree = "<group>"; };
+		322934AE14EFED1800FD2B1E /* THUNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THUNetworkManager.m; sourceTree = "<group>"; };
+		322934AF14EFED1800FD2B1E /* THUDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THUDownloadManager.h; sourceTree = "<group>"; };
+		322934B014EFED1800FD2B1E /* THUDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THUDownloadManager.m; sourceTree = "<group>"; };
+		322934B114EFED1800FD2B1E /* THUFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THUFileManager.h; sourceTree = "<group>"; };
+		322934B214EFED1800FD2B1E /* THUFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THUFileManager.m; sourceTree = "<group>"; };
+		322934B314EFED1800FD2B1E /* THUAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THUAccountManager.h; sourceTree = "<group>"; };
+		322934B414EFED1800FD2B1E /* THUAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THUAccountManager.m; sourceTree = "<group>"; };
+		322934B914EFF00000FD2B1E /* THUTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THUTabBarController.h; sourceTree = "<group>"; };
+		322934BA14EFF00000FD2B1E /* THUTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THUTabBarController.m; sourceTree = "<group>"; };
 		32ABBF98146BFCEA004829EF /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		32ABBF99146BFCEA004829EF /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		32ABBF9A146BFCEA004829EF /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
@@ -183,8 +194,6 @@
 		DD4F056B1451DAFD000FBD02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DD4F056D1451DAFD000FBD02 /* TsinghuaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TsinghuaTests.h; sourceTree = "<group>"; };
 		DD4F056E1451DAFD000FBD02 /* TsinghuaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TsinghuaTests.m; sourceTree = "<group>"; };
-		DD4F05821451DB78000FBD02 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
-		DD4F05831451DB78000FBD02 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		DD4F05881451E885000FBD02 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DD4F05891451E885000FBD02 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DD4F058A1451E885000FBD02 /* LoginViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -441,11 +450,15 @@
 		DD4F05811451DB55000FBD02 /* Core Engine */ = {
 			isa = PBXGroup;
 			children = (
+				322934AD14EFED1800FD2B1E /* THUNetworkManager.h */,
+				322934AE14EFED1800FD2B1E /* THUNetworkManager.m */,
+				322934AF14EFED1800FD2B1E /* THUDownloadManager.h */,
+				322934B014EFED1800FD2B1E /* THUDownloadManager.m */,
+				322934B114EFED1800FD2B1E /* THUFileManager.h */,
+				322934B214EFED1800FD2B1E /* THUFileManager.m */,
+				322934B314EFED1800FD2B1E /* THUAccountManager.h */,
+				322934B414EFED1800FD2B1E /* THUAccountManager.m */,
 				DD6F35FE14534C2A003B835C /* TFHpple */,
-				DD4F05821451DB78000FBD02 /* NetworkManager.h */,
-				DD4F05831451DB78000FBD02 /* NetworkManager.m */,
-				32A665DF14752C9500CE27FC /* DownloadManager.h */,
-				32A665E014752C9500CE27FC /* DownloadManager.m */,
 			);
 			name = "Core Engine";
 			sourceTree = "<group>";
@@ -461,6 +474,8 @@
 				DD4F058E1451E89F000FBD02 /* Login */,
 				32EA72E81462B3C4003F1095 /* THUViewController.h */,
 				32EA72E91462B3C4003F1095 /* THUViewController.m */,
+				322934B914EFF00000FD2B1E /* THUTabBarController.h */,
+				322934BA14EFF00000FD2B1E /* THUTabBarController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -863,7 +878,6 @@
 			files = (
 				DD4F05561451DAFD000FBD02 /* main.m in Sources */,
 				DD4F055A1451DAFD000FBD02 /* AppDelegate.m in Sources */,
-				DD4F05841451DB78000FBD02 /* NetworkManager.m in Sources */,
 				DD4F058B1451E885000FBD02 /* LoginViewController.m in Sources */,
 				DD6F35D314533E12003B835C /* HomeworkViewController.m in Sources */,
 				DD6F35D814533E25003B835C /* NotesViewController.m in Sources */,
@@ -881,9 +895,13 @@
 				32FC3FEC14600F220012A61E /* QLoadingView.m in Sources */,
 				32EA72EA1462B3C4003F1095 /* THUViewController.m in Sources */,
 				32ABBF9B146BFCEA004829EF /* HelpViewController.m in Sources */,
-				32A665E114752C9500CE27FC /* DownloadManager.m in Sources */,
 				DD42692C1490A4560053C587 /* SettingViewController.m in Sources */,
 				DDC467B2149922B90070478D /* AboutUsViewController.m in Sources */,
+				322934B514EFED1800FD2B1E /* THUNetworkManager.m in Sources */,
+				322934B614EFED1800FD2B1E /* THUDownloadManager.m in Sources */,
+				322934B714EFED1800FD2B1E /* THUFileManager.m in Sources */,
+				322934B814EFED1800FD2B1E /* THUAccountManager.m in Sources */,
+				322934BB14EFF00000FD2B1E /* THUTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

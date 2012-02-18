@@ -7,7 +7,7 @@
 //
 
 #import "NoteDetailViewController.h"
-#import "NetworkManager.h"
+#import "THUNetworkManager.h"
 
 @implementation NoteDetailViewController
 
@@ -40,7 +40,7 @@
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *urlRequst = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData 
                                                          timeoutInterval:100];
-    [urlRequst addValue:[[NetworkManager sharedManager] cookies] forHTTPHeaderField:@"Cookie"];
+    [urlRequst addValue:[[THUNetworkManager sharedManager] cookies] forHTTPHeaderField:@"Cookie"];
     [self.noteWebView loadRequest:urlRequst];
 }
 

@@ -8,7 +8,7 @@
 
 #import "HomeworkDetailViewController.h"
 #import "CourseInfo.h"
-#import "NetworkManager.h"
+#import "THUNetworkManager.h"
 #define PI 3.1415
 
 static NSString *baseString = @"http://learn.tsinghua.edu.cn/MultiLanguage/lesson/student/";

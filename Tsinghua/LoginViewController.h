@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "THUAccountManager.h"
 
-@interface LoginViewController : UIViewController <UIScrollViewDelegate> {
+static NSString *thuLoginNotification = @"thuLoginNotifiacation";
+static NSString *thuLogoutNotification = @"thulogoutNotification";
+
+@interface LoginViewController : UIViewController <UIScrollViewDelegate> 
+{
     UITextField *_userName;
     UITextField *_userPasswords;
     UIImageView *imageView;
@@ -25,6 +30,5 @@
 
 - (IBAction)loginButtonPressed:(id)sender;
 - (void)loadUserAccount;
-- (void)saveUserAccount;
 
 @end

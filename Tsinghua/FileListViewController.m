@@ -8,7 +8,8 @@
 
 #import "FileListViewController.h"
 #import "CourseInfo.h"
-#import "FIleContentViewController.h"
+#import "FileContentViewController.h"
+#import "THUFileManager.h"
 
 @implementation FileListViewController
 
@@ -18,15 +19,14 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    if (fileListArray == nil) {
+    if (fileListArray == nil) 
+    {
         NSString *requestURL = [self requestStringByReplacing:@"/lesson/student/course_locate.jsp" 
                                                    withString:@"/lesson/student/download.jsp" atIndex:self.selectedIndex];
         // Clear up the former stored file data
@@ -42,8 +42,6 @@
 {
     fileListArray = [[CourseInfo sharedCourseInfo] fileListInfo];
     fileSizeArray = [[CourseInfo sharedCourseInfo] fileSizeInfo];
-    //fileDescriptionArray = [[CourseInfo sharedCourseInfo] fileDescreitionInfo];
-    //fileUpdateTimeArray = [[CourseInfo sharedCourseInfo] fileUpdateInfo];
     fileLinkURLArray = [[CourseInfo sharedCourseInfo] fileLinkURLInfo];
     
     [self.mainTableView reloadData];
@@ -63,6 +61,7 @@
     
     // load the course name and set the title
     self.courseName = [[CourseInfo sharedCourseInfo].courseName objectAtIndex:self.selectedIndex];
+    [[THUFileManager defaultManager] switchToCurrentFolder:self.courseName];
     self.title = self.courseName;
 }
 
@@ -85,9 +84,11 @@
     cell.textLabel.text = fileName;
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
     
-    if ([[DownloadManager sharedManager] fileIsDownloaded:fileName forCourse:self.courseName]) {
+    if ([[THUFileManager defaultManager] fileExistsForName:[fileName stringByAppendingPathExtension:@"pdf"] course:self.courseName]) 
+    {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"文件大小:%@, %@",[fileSizeArray objectAtIndex:indexPath.row], @"已下载"];
-    } else {
+    } 
+    else {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"文件大小:%@, %@",[fileSizeArray objectAtIndex:indexPath.row], @"未下载"];
     }
     cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0f];
@@ -97,11 +98,12 @@
 
 - (BOOL)isFileTooLarge:(NSString *)fileSize
 {
-    if ([fileSize hasSuffix:@"M"]) {
+    if ([fileSize hasSuffix:@"M"]) 
+    {
         NSUInteger stringLength = fileSize.length;
         NSString *sizeString = [fileSize substringWithRange:NSMakeRange(0, stringLength-2)];
-        if ([sizeString floatValue] > 20.0) {
-            // The file is more than 15M large and can not be opened
+        if ([sizeString floatValue] > 20.0) 
+        {
             return NO;
         }
     }
@@ -110,7 +112,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (![self isFileTooLarge:[fileSizeArray objectAtIndex:indexPath.row]]) {
+    if (![self isFileTooLarge:[fileSizeArray objectAtIndex:indexPath.row]]) 
+    {
         UIAlertView *fileOpenAlert = [[UIAlertView alloc] initWithTitle:@"文件过大" 
                                                                 message:@"文件大于20M，请使用电脑打开" 
                                                                delegate:nil 
@@ -121,8 +124,8 @@
     }
     
     NSString *fileName = [[CourseInfo sharedCourseInfo].fileListInfo objectAtIndex:indexPath.row];
-    FIleContentViewController *controller = [[FIleContentViewController alloc] initWithCourseName:self.courseName 
-                                                                                         fileName:fileName index:indexPath.row];
+    FileContentViewController *controller = [[FileContentViewController alloc] 
+                                             initWithCourseName:self.courseName fileName:fileName index:indexPath.row];
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

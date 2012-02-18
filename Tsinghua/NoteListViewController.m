@@ -8,7 +8,7 @@
 
 #import "NoteListViewController.h"
 #import "CourseInfo.h"
-#import "NetworkManager.h"
+#import "THUNetworkManager.h"
 #import "NoteDetailViewController.h"
 
 

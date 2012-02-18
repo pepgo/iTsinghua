@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "QLoadingView.h"
-#import "NetworkManager.h"
+#import "THUNetworkManager.h"
 #import "CourseInfo.h"
 
 /*

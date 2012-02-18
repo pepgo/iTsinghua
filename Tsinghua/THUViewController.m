@@ -22,16 +22,8 @@
 
 - (id)initWithIndex:(NSInteger)index courseName:(NSString *)cName
 {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-            self = [super initWithNibName:@"HomeworkDetailViewController_iPad" bundle:nil];
-        } else {
-            self = [super initWithNibName:@"HomeworkDetailViewController_iPad_land" bundle:nil];
-        }
-    } else {
-        self = [super initWithNibName:@"HomeworkDetailViewController_iPhone" bundle:nil];
-    }
-    if (self) {
+    if (self) 
+    {
         self.selectedIndex = index;
         self.currentCourseName = cName;
     }
@@ -69,6 +61,7 @@
     self.mainTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.view.autoresizesSubviews = YES;
     self.mainTableView.autoresizesSubviews = YES;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
     // Observe the notification of request finish and request time out
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFinish:) name:thuTimeOutNotification object:nil];
@@ -89,7 +82,7 @@
     [self.view setHidden:YES];                                                 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;    
     [QLoadingView showWithInfo:@"正在载入数据..."];
-    [[NetworkManager sharedManager] sendNetworkRequest:type url:rURL object:nil];          
+    [[THUNetworkManager sharedManager] sendNetworkRequest:type url:rURL object:nil];          
 }
 
 - (void)requestDidFinish:(NSNotification *)notification
@@ -112,7 +105,7 @@
 {
     if (logoutButton == nil) {
         logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"注销" 
-                                                        style:UIBarButtonItemStyleDone 
+                                                        style:UIBarButtonItemStyleBordered 
                                                        target:self 
                                                        action:@selector(logoutButtonPressed)];
     }
@@ -198,8 +191,8 @@
     // Since the view transition happens before sending the request, the last request
     // url is certainly to be the url of this view. So we store the request type and 
     // the url and re-use them when pressing refresh button.
-    [self requestDidStartOfType:[NetworkManager sharedManager].lastRequestType 
-                            url:[NetworkManager sharedManager].lastRequestURL];
+    [self requestDidStartOfType:[THUNetworkManager sharedManager].lastRequestType 
+                            url:[THUNetworkManager sharedManager].lastRequestURL];
 }
 
 - (void)reloadDataSource
