@@ -348,6 +348,7 @@ static NSString *courseInfoString = @"http://learn.tsinghua.edu.cn/MultiLanguage
     for (NSUInteger i = 0; i < length; i++) {
         element = (TFHppleElement *)[elements objectAtIndex:i];
         range = [[element content] rangeOfString:@"序"];
+       
         if (range.location == 0 && [element content] != NULL) {
             serialNumber += 1;
             if (serialNumber ==3) {
@@ -355,9 +356,15 @@ static NSString *courseInfoString = @"http://learn.tsinghua.edu.cn/MultiLanguage
             }
         }
         if (i > 3) 
-        {
-            NSString *fileName = [[element content] stringByReplacingOccurrencesOfString:@" " withString:@" "];
-            [fileListArray insertObject:fileName atIndex:i - 4];
+        {    
+            if ([element firstChild].content != nil) {
+                NSString *fileName = [[[element firstChild] content] stringByReplacingOccurrencesOfString:@" " withString:@" "];
+                [fileListArray insertObject:fileName atIndex:i - 4];
+
+            } else {
+                NSString *fileName = [[element content] stringByReplacingOccurrencesOfString:@" " withString:@" "];
+                [fileListArray insertObject:fileName atIndex:i - 4];
+            }
         }
     }
     [[CourseInfo sharedCourseInfo] setFileListInfo:fileListArray];

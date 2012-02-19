@@ -28,9 +28,11 @@ static NSString *PDFHeaderString = @"<25504446>";
     UILabel   *downloadRateLabel;
     NSString  *courseName;
     NSString  *fileName;
+    NSString  *fileType;
     NSString  *MIMEType;
     NSInteger  index;
     NSData    *documentData;
+    BOOL       fileExist;
 }
 
 @property (strong, nonatomic) IBOutlet UIWebView *fileContentView;
@@ -39,13 +41,15 @@ static NSString *PDFHeaderString = @"<25504446>";
 @property (strong, nonatomic) IBOutlet UILabel *downloadRateLabel;
 @property (strong, nonatomic) NSString *MIMEType;
 @property (strong, nonatomic) NSString *fileName;
+@property (strong, nonatomic) NSString *fileType;
 @property (strong, nonatomic) NSString *courseName;
 @property (strong, nonatomic) NSData *documentData;
 @property (assign, nonatomic) NSInteger index;
+@property (assign, nonatomic) BOOL fileExist;
 
 // Initializer:
 // @since 1.4
-- (id)initWithCourseName:(NSString *)courseName fileName:(NSString *)fileName index:(NSInteger)index;
+- (id)initWithCourseName:(NSString *)courseName fileName:(NSString *)fileName fileType:(NSString *)type index:(NSInteger)index exist:(BOOL)exist;
 
 // Function:
 // type:MIMEType for the file.

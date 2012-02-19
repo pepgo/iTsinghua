@@ -14,7 +14,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "124"
          endingLineNumber = "124"
+<<<<<<< HEAD
          landmarkName = "-downloadDidFinish:"
+=======
+         landmarkName = "-webViewWillStartLoadingWithType:"
+>>>>>>> chuyang
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -70,7 +74,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "182"
          endingLineNumber = "182"
+<<<<<<< HEAD
          landmarkName = "-viewDidLoad"
+=======
+         landmarkName = "-downloadDidFinish:"
+>>>>>>> chuyang
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -84,7 +92,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "168"
          endingLineNumber = "168"
+<<<<<<< HEAD
          landmarkName = "-viewDidLoad"
+=======
+         landmarkName = "-downloadDidFinish:"
+>>>>>>> chuyang
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -97,7 +109,13 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "149"
+<<<<<<< HEAD
          endingLineNumber = "149">
+=======
+         endingLineNumber = "149"
+         landmarkName = "-fileTypeForName:course:"
+         landmarkType = "5">
+>>>>>>> chuyang
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -124,7 +142,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "126"
          endingLineNumber = "126"
+<<<<<<< HEAD
          landmarkName = "-deleteFile:course:"
+=======
+         landmarkName = "-loadDataForFileName:course:error:"
+>>>>>>> chuyang
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -138,7 +160,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "139"
          endingLineNumber = "139"
+<<<<<<< HEAD
          landmarkName = "-downloadDidFinish:"
+=======
+         landmarkName = "-webViewWillStartLoadingWithType:"
+>>>>>>> chuyang
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -152,7 +178,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "102"
          endingLineNumber = "102"
+<<<<<<< HEAD
          landmarkName = "-loadDataForFileName:course:error:"
+=======
+         landmarkName = "-renameFile:newExtension:"
+>>>>>>> chuyang
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -166,7 +196,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "97"
          endingLineNumber = "97"
+<<<<<<< HEAD
          landmarkName = "-loadDataForFileName:course:error:"
+=======
+         landmarkName = "-renameFile:newExtension:"
+>>>>>>> chuyang
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -20,15 +20,19 @@
 @synthesize documentData;
 @synthesize courseName;
 @synthesize fileName;
+@synthesize fileType;
 @synthesize index;
+@synthesize fileExist;
 
-- (id)initWithCourseName:(NSString *)course fileName:(NSString *)file index:(NSInteger)sIndex
+- (id)initWithCourseName:(NSString *)course fileName:(NSString *)file fileType:(NSString *)type index:(NSInteger)sIndex exist:(BOOL)exist 
 {
     if (self = [super init]) 
     {
         self.courseName = course;
-        self.fileName = [file stringByAppendingPathExtension:@"pdf"];
+        self.fileName = file;
         self.index = sIndex;
+        self.fileExist = exist;
+        self.fileType = type;
     }
     return self;
 }
@@ -42,16 +46,26 @@
 }
 
 #pragma mark - get notification of file type to determine the MIME type
-- (void)determineFileType:(NSNotification *)notification {
-    NSString *fileType = [[notification userInfo] objectForKey:@"FILE_TYPE"];
-    if ([fileType isEqual:@"pdf"]) {
+- (void)determineFileType:(NSNotification *)notification 
+{
+    self.fileType = [[notification userInfo] objectForKey:@"FILE_TYPE"];
+    NSLog(@"type: %@ and file name:%@", self.fileType,self.fileName);
+        
+    if ([self.fileType isEqualToString:@"pdf"]) {
         self.MIMEType = Format_PDF;
-    } else if ([fileType isEqual:@"doc"]) {
+        [[THUFileManager defaultManager] setFile:self.fileName newExtension:@"pdf"];
+    } 
+    else if ([self.fileType isEqual:@"doc"]) {
         self.MIMEType = Format_DOC;
-    } else if ([fileType isEqual:@"ppt"]) {
+        [[THUFileManager defaultManager] setFile:self.fileName newExtension:@"doc"];
+    } 
+    else if ([self.fileType isEqual:@"ppt"]) {
         self.MIMEType = Format_PPT;
-    } else if ([fileType isEqual:@"xls"]) {
+        [[THUFileManager defaultManager] setFile:self.fileName newExtension:@"ppt"];
+    } 
+    else if ([self.fileType isEqual:@"xls"]) {
         self.MIMEType = Format_XLS;
+        [[THUFileManager defaultManager] setFile:self.fileName newExtension:@"xls"];
     }
 }
 
@@ -59,10 +73,11 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    if ([[THUFileManager defaultManager] fileExistsForName:self.fileName course:self.courseName] == YES) 
+    if (self.fileExist == YES) 
     {
         NSError *error = nil;
-        self.documentData = [[THUFileManager defaultManager] loadDataForFileName:self.fileName course:self.courseName error:&error];
+        NSString *fileFullName = [self.fileName stringByAppendingPathExtension:self.fileType];
+        self.documentData = [[THUFileManager defaultManager] loadDataForFileName:fileFullName course:self.courseName error:&error];
         if (error != nil) 
         {
             NSLog(@"Error occured when loading data. Error: %@", [error localizedDescription]);
@@ -78,7 +93,8 @@
     {
         NSArray *array = [NSArray arrayWithArray:[CourseInfo sharedCourseInfo].fileLinkURLInfo];
         NSString *url = [@"http://learn.tsinghua.edu.cn" stringByAppendingString:[array objectAtIndex:self.index]];
-        [[THUDownloadManager sharedManager] startDownload:self.fileName forCourse:self.courseName withUrl:url];
+        [[THUDownloadManager sharedManager] startDownload:[self.fileName stringByAppendingPathExtension:@"pdf"] 
+                                                forCourse:self.courseName withUrl:url];
         
         // Show the download sliderbar and waiting label
         [self.downloadSlider setHidden:NO];
@@ -99,8 +115,31 @@
 
 - (void)webViewWillStartLoadingWithType:(NSString *)type
 {
-    NSAssert(self.documentData != nil, @"The data file is nil or corrupted!");
+    //NSAssert(self.documentData != nil, @"The data file is nil or corrupted!");
+
+    NSString *fileFullName = [self.fileName stringByAppendingPathExtension:self.fileType];
+    NSString *fileFullPath = [[THUFileManager defaultManager] directoryForFile:fileFullName course:self.courseName];
     
+    NSArray *fileTypeArray = [fileFullName componentsSeparatedByString:@"."];
+    NSString *realFileType = [fileTypeArray objectAtIndex:1];
+    if ([realFileType isEqualToString:@"pdf"]) {
+        type = Format_PDF;
+    } else if ([realFileType isEqualToString:@"doc"] || [realFileType isEqualToString:@"docx"]) {
+        type = Format_DOC;
+    } else if ([realFileType isEqualToString:@"ppt"] || [realFileType isEqualToString:@"pptx"]) {
+        type = Format_PPT;
+    } else if ([realFileType isEqualToString:@"xls"] || [realFileType isEqualToString:@"xlsx"]) {
+        type = Format_XLS;
+    } 
+    
+    NSLog(@"@file name:%@",fileFullName);
+    NSLog(@"file path:%@",fileFullPath);
+    NSLog(@"file type:%@",type);
+    
+    NSURLRequest *loadRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:fileFullPath]];
+    [self.fileContentView loadRequest:loadRequest];
+
+
     NSData *fileSubData = [self.documentData subdataWithRange:NSMakeRange(0, 4)];
     NSString *dataHeaderString = [fileSubData description];
     if ([dataHeaderString isEqualToString:PDFHeaderString]) 
@@ -110,11 +149,12 @@
     }
     else
     {
-        /*
-         [[THUFileManager defaultManager] setFile:self.fileName newExtension:@"doc"];
-         [self.fileContentView loadData:self.documentData MIMEType:type textEncodingName:textEncoding baseURL:nil];
-         */
+        
+        [[THUFileManager defaultManager] setFile:self.fileName newExtension:@"doc"];
+        [self.fileContentView loadData:self.documentData MIMEType:type textEncodingName:textEncoding baseURL:nil];
+         
     }
+    
 }
 
 - (void)downloadDidFinish:(NSNotification *)notification
@@ -122,7 +162,9 @@
     if ([notification.name isEqualToString:thuDownloadFinishNotification]) 
     {
         NSError *error = nil;
-        self.documentData = [[THUFileManager defaultManager] loadDataForFileName:self.fileName course:self.courseName error:&error];
+        NSString *fileFullName = [self.fileName stringByAppendingPathExtension:self.fileType];
+        self.documentData = [[THUFileManager defaultManager] loadDataForFileName:fileFullName course:self.courseName error:&error];
+        NSLog(@"file full name:%@",fileFullName);
         if (error != nil) 
         {
             // Error handlement here
@@ -134,6 +176,7 @@
             [readDataAlert show];
         }
         [self webViewWillStartLoadingWithType:self.MIMEType];
+        NSLog(@"MIME type:%@",self.MIMEType);
         
         // Hide the download progress slider
         [[NSNotificationCenter defaultCenter] removeObserver:self name:thuDownloadProgressChangeNotification object:nil];
@@ -192,7 +235,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    if ([self.MIMEType isEqualToString:Format_DOC]) 
+    /*if ([self.MIMEType isEqualToString:Format_DOC]) 
     {
         self.MIMEType = Format_PPT;
         [[THUFileManager defaultManager] setFile:self.fileName newExtension:@"ppt"];
@@ -213,7 +256,7 @@
         return;
     }
     
-    [self webViewWillStartLoadingWithType:self.MIMEType];
+    [self webViewWillStartLoadingWithType:self.MIMEType];*/
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
