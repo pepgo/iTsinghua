@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "THUTabBarController.h"
 #import "QLoadingView.h"
+#import "THUNotifications.h"
 
 @implementation AppDelegate
 
@@ -18,28 +19,7 @@
 @synthesize navController = _navController;
 @synthesize localNotificationsArray = _localNotificationsArray;
 
-- (void)logoutNotificationReceived:(NSNotification *)notification
-{
-    LoginViewController *loginViewController = nil;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) { 
-        if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-            loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController_iPad" bundle:nil];
-        }
-        else { 
-            loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController_iPad_land" bundle:nil];
-        }
-    }
-    else {
-        loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController_iPhone" bundle:nil];
-    }
-    
-    CATransition *fadeTransition = [CATransition animation];
-    fadeTransition.duration = 0.5f;
-    fadeTransition.type = kCATransitionFade;
-    fadeTransition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    [self.navController.view.layer addAnimation:fadeTransition forKey:@"fadeTransition"];
-    [self.navController pushViewController:loginViewController animated:YES];
-}
+
 
 - (void)loginNotificationReceived:(NSNotification *)notification
 {
@@ -55,10 +35,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Method for LogoutNotification received
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotificationReceived:) name:thuLogoutNotification object:nil];
     // Method for LoginNotification received
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotificationReceived:) name:thuLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotificationReceived:) 
+                                                 name:thuLoginNotification object:nil];
     
     UILocalNotification *localNotification = nil;
     if ((localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey])) 

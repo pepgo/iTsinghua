@@ -8,6 +8,7 @@
 
 #import "THUViewController.h"
 #import "CourseInfo.h"
+#import "THUNotifications.h"
 
 @implementation THUViewController
 
@@ -202,8 +203,9 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == actionSheet.firstOtherButtonIndex) {
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"Logout" object:nil]];
+    if (buttonIndex == actionSheet.firstOtherButtonIndex) 
+    {
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:thuLogoutNotification object:nil]];
     }
 }
 

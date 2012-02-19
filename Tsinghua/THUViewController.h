@@ -10,6 +10,7 @@
 #import "QLoadingView.h"
 #import "THUNetworkManager.h"
 #import "CourseInfo.h"
+#import "THUNotifications.h"
 
 /*
  Change Log:

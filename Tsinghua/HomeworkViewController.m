@@ -8,6 +8,7 @@
 
 #import "HomeworkViewController.h"
 #import "HomeworkListViewController.h"
+#import "THUNotifications.h"
 
 @implementation HomeworkViewController
 

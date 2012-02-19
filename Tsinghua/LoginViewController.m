@@ -10,6 +10,7 @@
 #import "THUNetworkManager.h"
 #import "AppDelegate.h"
 #import "QLoadingView.h"
+#import "THUNotifications.h"
 
 
 @implementation LoginViewController
@@ -55,7 +56,7 @@
     [UIView commitAnimations];
 }
 
-- (void)loginSucceed:(NSNotification *)notification
+- (void)loginDidSucceed:(NSNotification *)notification
 {
 #ifdef DEBUG
     NSAssert([notification.name isEqualToString:thuLoginSucceedNotification], @"");
@@ -68,7 +69,7 @@
     [[THUAccountManager defaultManager] setCurrentPassword:self.userPasswords.text];
 }
 
-- (void)loginFailed:(NSNotification *)notification
+- (void)loginDidFail:(NSNotification *)notification
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登录失败" 
                                                     message:@"用户名或密码错误" 
@@ -101,17 +102,15 @@
     [UIView commitAnimations];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView 
+{
     CGPoint offset = aScrollView.contentOffset;
+    
     int currentPageNumber;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
-    {
         currentPageNumber = offset.x / 768.0f;
-    } 
     else 
-    {
         currentPageNumber = offset.x / 320.0f;
-    }
     
     if (currentPageNumber == 3) 
     {
@@ -129,15 +128,14 @@
 
 - (void)viewDidLoad
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed:) name:thuLoginSucceedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed:) name:thuLoginFailedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endHelp) name:@"End Help" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginDidSucceed:) name:thuLoginSucceedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginDidFail:) name:thuLoginFailedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endHelp) name:thuEndShowTipsNotification object:nil];
     
     [_userName addTarget:self action:@selector(textFieldDidEndEditing) forControlEvents:UIControlEventEditingDidEndOnExit];
     [_userName addTarget:self action:@selector(textFieldDidStartEditing) forControlEvents:UIControlEventEditingDidBegin];
     [_userPasswords addTarget:self action:@selector(textFieldDidEndEditing) forControlEvents:UIControlEventEditingDidEndOnExit];
     [_userPasswords addTarget:self action:@selector(textFieldDidStartEditing) forControlEvents:UIControlEventEditingDidBegin];
-    [imageView setImage:[UIImage imageNamed:@"Tsinghua.jpg"]];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
     {

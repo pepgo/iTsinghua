@@ -153,6 +153,7 @@
 		32ABBF9A146BFCEA004829EF /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		32EA72E81462B3C4003F1095 /* THUViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THUViewController.h; sourceTree = "<group>"; };
 		32EA72E91462B3C4003F1095 /* THUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THUViewController.m; sourceTree = "<group>"; };
+		32F36C1114F08DBB009691CD /* THUNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THUNotifications.h; sourceTree = "<group>"; };
 		32FC3FEA14600F220012A61E /* QLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLoadingView.h; sourceTree = "<group>"; };
 		32FC3FEB14600F220012A61E /* QLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLoadingView.m; sourceTree = "<group>"; };
 		32FC4000146017040012A61E /* info_bkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_bkg.png; sourceTree = "<group>"; };
@@ -476,6 +477,7 @@
 				32EA72E91462B3C4003F1095 /* THUViewController.m */,
 				322934B914EFF00000FD2B1E /* THUTabBarController.h */,
 				322934BA14EFF00000FD2B1E /* THUTabBarController.m */,
+				32F36C1114F08DBB009691CD /* THUNotifications.h */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

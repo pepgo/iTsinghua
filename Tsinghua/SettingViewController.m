@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "CourseInfo.h"
 #import "AboutUsViewController.h"
+#import "THUFileManager.h"
 
 @implementation SettingViewController
 
@@ -45,17 +46,11 @@
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        for (NSString *courseName in [[CourseInfo sharedCourseInfo] courseName]) {
-            NSString *accountName = [[NSUserDefaults standardUserDefaults] valueForKey:@"current_account"];
-            NSString *courseDir = [[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] 
-                                    stringByAppendingPathComponent:accountName] stringByAppendingPathComponent:courseName];
-            [[NSFileManager defaultManager] removeItemAtPath:courseDir error:nil];
-        }
-        return;
-    } else {
-        return;
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex 
+{
+    if (buttonIndex == alertView.firstOtherButtonIndex) 
+    {
+        [[THUFileManager defaultManager] deleteAllFolders];
     }
 }
 
