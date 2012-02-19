@@ -88,7 +88,23 @@ static THUFileManager *defaultManager = nil;
     }
 }
 
-
+- (void)renameFile:(NSString *)fileName newExtension:(NSString *)newExtention {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error = nil;
+    NSString *fileDir = [self.currentFolderDir stringByAppendingPathComponent:fileName];
+    NSLog(@"old dir: %@", fileDir);
+    
+    if ([fileManager fileExistsAtPath:fileDir]) 
+    {
+        NSString *newFileName = [[fileName stringByDeletingPathExtension] stringByAppendingFormat:@".%@", newExtention];
+        NSString *newFileDir = [[fileDir stringByDeletingLastPathComponent] stringByAppendingPathComponent:newFileName];
+        NSLog(@"new dir: %@", newFileDir);
+        [fileManager moveItemAtPath:fileDir toPath:newFileDir error:&error];
+        if (error != nil) 
+        {
+        }
+    }
+}
 
 - (NSData *)loadDataForFileName:(NSString *)fileName course:(NSString *)course error:(NSError *__autoreleasing *)error
 {
@@ -96,17 +112,55 @@ static THUFileManager *defaultManager = nil;
     NSString *fileDir = [[self currentFolderDir] stringByAppendingPathComponent:fileName];
     NSURL *fileURL = [NSURL fileURLWithPath:fileDir];
     
+    NSArray *arrayForName = [fileDir componentsSeparatedByString:@"/"];
+    NSLog(@"current file name:%@",[arrayForName objectAtIndex:13]);
+    
+    NSArray *array = [fileDir componentsSeparatedByString:@"."];
+    NSLog(@"current file type:%@",[array objectAtIndex:2]);
+    
+    NSLog(@"fir dir:%@, file url:%@",fileDir,[fileURL description]);
+    [self renameFile:[arrayForName objectAtIndex:13] newExtension:[array objectAtIndex:2]];
+//    [self setFile:[[[arrayForName objectAtIndex:13] componentsSeparatedByString:@"."] objectAtIndex:0] newExtension:[array objectAtIndex:2]];
+    NSLog(@"file name:%@",[[[arrayForName objectAtIndex:13] componentsSeparatedByString:@"."] objectAtIndex:0]);
+    
     // Read the data safely
     NSError *readError = nil;
-    NSData *fileData = [NSData dataWithContentsOfURL:fileURL options:NSDataReadingUncached error:&readError];
+    NSData *fileData = [NSData dataWithContentsOfFile:fileDir options:NSDataReadingUncached error:&readError];
     if (readError != nil || fileData == nil) 
-    {
+    {   
         *error = readError;
         NSLog(@"THUFileManager: error reading file %@ data. Error : %@", fileName, readError.localizedDescription);
         return nil;
     }
     
     return fileData;
+}
+
+
+- (NSString *)directoryForFile:(NSString *)fileFullName course:(NSString *)course
+{
+    NSString *courseDir = [[self currentAccountDirectory] stringByAppendingPathComponent:course];
+    NSString *fileDir = [courseDir stringByAppendingPathComponent:fileFullName];
+    return fileDir;
+}
+
+- (NSString *)fileTypeForName:(NSString *)fileName course:(NSString *)course
+{
+    if ([self fileExistsForName:[fileName stringByAppendingPathExtension:@"pdf"] course:course] == YES) {
+        return @"pdf";
+    }
+    else if ([self fileExistsForName:[fileName stringByAppendingPathExtension:@"doc"] course:course] == YES) {
+        return @"doc";
+    }
+    else if ([self fileExistsForName:[fileName stringByAppendingPathExtension:@"ppt"] course:course] == YES) {
+        return @"ppt";
+    }
+    else if ([self fileExistsForName:[fileName stringByAppendingPathExtension:@"xls"] course:course] == YES) {
+        return @"xls";
+    }
+    else {
+        return @"text";
+    }
 }
 
 - (BOOL)fileExistsForName:(NSString *)fileName course:(NSString *)course
@@ -240,11 +294,13 @@ static THUFileManager *defaultManager = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
     NSString *fileDir = [self.currentFolderDir stringByAppendingPathComponent:fileName];
-    if ([fileManager fileExistsAtPath:fileDir] == YES) 
+    NSLog(@"old dir: %@", fileDir);
+    
+    if ([fileManager fileExistsAtPath:fileDir]) 
     {
         NSString *newFileName = [[fileName stringByDeletingPathExtension] stringByAppendingFormat:@".%@", extension];
         NSString *newFileDir = [[fileDir stringByDeletingLastPathComponent] stringByAppendingPathComponent:newFileName];
-        
+        NSLog(@"new dir: %@", newFileDir);
         [fileManager moveItemAtPath:fileDir toPath:newFileDir error:&error];
         if (error != nil) 
         {

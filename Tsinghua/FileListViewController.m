@@ -81,10 +81,14 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSString *fileName = [fileListArray objectAtIndex:indexPath.row];
+    NSLog(@"file name:%@",fileName);
+    NSString *fileType = [[THUFileManager defaultManager] fileTypeForName:fileName course:self.courseName];
+    NSString *fileFullName = [fileName stringByAppendingPathExtension:([fileType isEqualToString:@"text"] ? fileType : @"text")];
+    NSLog(@"file full name:%@",fileFullName);
     cell.textLabel.text = fileName;
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
     
-    if ([[THUFileManager defaultManager] fileExistsForName:[fileName stringByAppendingPathExtension:@"pdf"] course:self.courseName]) 
+    if ([[THUFileManager defaultManager] fileExistsForName:fileFullName course:self.courseName]) 
     {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"文件大小:%@, %@",[fileSizeArray objectAtIndex:indexPath.row], @"已下载"];
     } 
@@ -124,8 +128,11 @@
     }
     
     NSString *fileName = [[CourseInfo sharedCourseInfo].fileListInfo objectAtIndex:indexPath.row];
+    NSString *fileType = [[THUFileManager defaultManager] fileTypeForName:fileName course:self.courseName];
+    BOOL fileExist = fileType == @"text" ? NO : YES;
+    
     FileContentViewController *controller = [[FileContentViewController alloc] 
-                                             initWithCourseName:self.courseName fileName:fileName index:indexPath.row];
+                                             initWithCourseName:self.courseName fileName:fileName fileType:fileType index:indexPath.row exist:fileExist];
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

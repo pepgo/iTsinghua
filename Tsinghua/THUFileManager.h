@@ -20,14 +20,22 @@
 + (THUFileManager *)defaultManager;
 
 // @since 2.1
-- (void)saveData:(NSData *)fileData name:(NSString *)fileName course:(NSString *)course;
+- (void)saveData:(NSData *)fileData name:(NSString *)fileFullName course:(NSString *)course;
 
 // @since 2.1
-- (NSData *)loadDataForFileName:(NSString *)fileName course:(NSString *)course error:(NSError **)error;
+- (NSData *)loadDataForFileName:(NSString *)fileFullName course:(NSString *)course error:(NSError **)error;
 
-// Search the specific file. If the file exists, view controller can load the data directly.
+// Return the file full directory given the full name and course name
+// @since 2.2
+- (NSString *)directoryForFile:(NSString *)fileFullName course:(NSString *)course;
+
+// Return the file type given the file name and course name.
+// @since 2.2
+- (NSString *)fileTypeForName:(NSString *)fileName course:(NSString *)course;
+
+// Search the specific file given the file full name. If the file exists, view controller can load the data directly.
 // @since 2.1
-- (BOOL)fileExistsForName:(NSString *)fileName course:(NSString *)course;
+- (BOOL)fileExistsForName:(NSString *)fileFullName course:(NSString *)course;
 
 // Delete the downloaded files given the file name and course name
 // @since 2.1
