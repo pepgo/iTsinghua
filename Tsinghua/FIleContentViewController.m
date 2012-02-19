@@ -41,6 +41,20 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - get notification of file type to determine the MIME type
+- (void)determineFileType:(NSNotification *)notification {
+    NSString *fileType = [[notification userInfo] objectForKey:@"FILE_TYPE"];
+    if ([fileType isEqual:@"pdf"]) {
+        self.MIMEType = Format_PDF;
+    } else if ([fileType isEqual:@"doc"]) {
+        self.MIMEType = Format_DOC;
+    } else if ([fileType isEqual:@"ppt"]) {
+        self.MIMEType = Format_PPT;
+    } else if ([fileType isEqual:@"xls"]) {
+        self.MIMEType = Format_XLS;
+    }
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidAppear:(BOOL)animated
@@ -87,12 +101,12 @@
 {
     NSAssert(self.documentData != nil, @"The data file is nil or corrupted!");
     
-    NSData *fileSubData = [self.documentData subdataWithRange:NSMakeRange(0, 8)];
+    NSData *fileSubData = [self.documentData subdataWithRange:NSMakeRange(0, 4)];
     NSString *dataHeaderString = [fileSubData description];
     if ([dataHeaderString isEqualToString:PDFHeaderString]) 
     {
         // Load the PDF file directly
-        [self.fileContentView loadData:self.documentData MIMEType:Format_PDF textEncodingName:textEncoding baseURL:nil];
+        [self.fileContentView loadData:self.documentData MIMEType:type textEncodingName:textEncoding baseURL:nil];
     }
     else
     {
@@ -143,6 +157,9 @@
     // Observe the download progress notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadProgressDidChange:) 
                                                  name:thuDownloadProgressChangeNotification object:nil];
+    
+    // Observe the file type notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(determineFileType:) name:@"GET_FILE_TYPE" object:nil];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" 
                                                                    style:UIBarButtonItemStyleBordered 

@@ -18,7 +18,7 @@ static NSString *Format_XLS = @"application/vnd.ms-excel";
 static NSString *textEncoding = @"utf-8";
 
 // @since 2.2
-static NSString *PDFHeaderString = @"<25504446 2d312e34>";
+static NSString *PDFHeaderString = @"<25504446>";
 
 @interface FileContentViewController : UIViewController <UIWebViewDelegate, UIAlertViewDelegate> 
 {
