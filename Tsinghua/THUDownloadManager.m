@@ -17,6 +17,7 @@
 @synthesize downloadRate;
 @synthesize lastFileName;
 @synthesize lastCourseName;
+@synthesize lastFileExtension;
 
 + (THUDownloadManager *)sharedManager
 {
@@ -70,11 +71,20 @@
 - (void)downloadConnectionDidFinish:(NSURLConnection *)connection data:(NSData *)data
 {
     // Save the downloaded data
-    [[THUFileManager defaultManager] saveData:data name:self.lastFileName course:self.lastCourseName];
+    if (lastFileExtension != nil) 
+    {
+        NSString *fileFullName = [self.lastFileName stringByAppendingPathExtension:self.lastFileExtension];
+        [[THUFileManager defaultManager] saveData:data name:fileFullName course:self.lastCourseName];
+    }
     
     // Post the download finish notification
     NSNotification *notification = [NSNotification notificationWithName:thuDownloadFinishNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+- (void)downloadConnection:(NSURLConnection *)connection fileExtension:(NSString *)extension
+{
+    [self setLastFileExtension:extension];
 }
 
 - (void)downloadConnectionDidStart:(NSURLConnection *)connection

@@ -31,7 +31,7 @@
 
 // Return the file type given the file name and course name.
 // @since 2.2
-- (NSString *)fileTypeForName:(NSString *)fileName course:(NSString *)course;
+- (NSString *)extensionForFile:(NSString *)fileFullName course:(NSString *)course;
 
 // Search the specific file given the file full name. If the file exists, view controller can load the data directly.
 // @since 2.1

@@ -103,5 +103,6 @@ static NSString *thuFileDownloadRequest = @"thuFileDownloadRequest";
 - (void)downloadConnectionDidStart:(NSURLConnection *)connection;
 - (void)downloadConnectionDidFinish:(NSURLConnection *)connection data:(NSData *)data;
 - (void)downloadConnection:(NSURLConnection *)connection receiveDataRate:(float)downloadRate;
+- (void)downloadConnection:(NSURLConnection *)connection fileExtension:(NSString *)extension;
 @end
 

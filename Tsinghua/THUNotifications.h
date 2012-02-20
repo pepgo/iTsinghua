@@ -31,3 +31,6 @@ static NSString *thuDownloadFinishNotification = @"thuDownloadFinishNotification
 
 // This notification will be post when download progress changes more than 2%. 
 static NSString *thuDownloadProgressChangeNotification = @"thuDownloadProgressChangeNotification";
+
+// This notification will be post when file is downloaded to notify the file extension
+static NSString *thuFileExtensionNotification = @"thuFileExtensionNotification";

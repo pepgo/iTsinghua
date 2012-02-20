@@ -81,10 +81,8 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSString *fileName = [fileListArray objectAtIndex:indexPath.row];
-    NSLog(@"file name:%@",fileName);
-    NSString *fileType = [[THUFileManager defaultManager] fileTypeForName:fileName course:self.courseName];
-    NSString *fileFullName = [fileName stringByAppendingPathExtension:([fileType isEqualToString:@"text"] ? fileType : @"text")];
-    NSLog(@"file full name:%@",fileFullName);
+    NSString *fileType = [[THUFileManager defaultManager] extensionForFile:fileName course:self.courseName];
+    NSString *fileFullName = [fileName stringByAppendingPathExtension:(fileType != nil ? fileType : @"pdf")];
     cell.textLabel.text = fileName;
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
     
@@ -128,8 +126,8 @@
     }
     
     NSString *fileName = [[CourseInfo sharedCourseInfo].fileListInfo objectAtIndex:indexPath.row];
-    NSString *fileType = [[THUFileManager defaultManager] fileTypeForName:fileName course:self.courseName];
-    BOOL fileExist = fileType == @"text" ? NO : YES;
+    NSString *fileType = [[THUFileManager defaultManager] extensionForFile:fileName course:self.courseName];
+    BOOL fileExist = fileType == nil ? NO : YES;
     
     FileContentViewController *controller = [[FileContentViewController alloc] 
                                              initWithCourseName:self.courseName fileName:fileName fileType:fileType index:indexPath.row exist:fileExist];

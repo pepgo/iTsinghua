@@ -59,7 +59,11 @@ static NSString *PDFHeaderString = @"<25504446>";
 // the MIMEType. If all the four types tested but still can not be open, the data is unable to 
 // load due to unknown formats.
 // @since 1.4
-- (void)webViewWillStartLoadingWithType:(NSString *)type;
+// - (void)webViewWillStartLoadingWithType:(NSString *)type;
+
+// Make the web view start loading file, using the local url request method
+// @since 2.2
+- (void)webViewStartLoadingFile;
 
 // Function:
 // Called when download progress notification received. This will change the slider value

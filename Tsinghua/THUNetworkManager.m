@@ -348,7 +348,6 @@ static NSString *courseInfoString = @"http://learn.tsinghua.edu.cn/MultiLanguage
     for (NSUInteger i = 0; i < length; i++) {
         element = (TFHppleElement *)[elements objectAtIndex:i];
         range = [[element content] rangeOfString:@"序"];
-       
         if (range.location == 0 && [element content] != NULL) {
             serialNumber += 1;
             if (serialNumber ==3) {
@@ -356,15 +355,9 @@ static NSString *courseInfoString = @"http://learn.tsinghua.edu.cn/MultiLanguage
             }
         }
         if (i > 3) 
-        {    
-            if ([element firstChild].content != nil) {
-                NSString *fileName = [[[element firstChild] content] stringByReplacingOccurrencesOfString:@" " withString:@" "];
-                [fileListArray insertObject:fileName atIndex:i - 4];
-
-            } else {
-                NSString *fileName = [[element content] stringByReplacingOccurrencesOfString:@" " withString:@" "];
-                [fileListArray insertObject:fileName atIndex:i - 4];
-            }
+        {
+            NSString *fileName = [[element content] stringByReplacingOccurrencesOfString:@" " withString:@" "];
+            [fileListArray insertObject:fileName atIndex:i - 4];
         }
     }
     [[CourseInfo sharedCourseInfo] setFileListInfo:fileListArray];
@@ -436,27 +429,12 @@ static NSString *courseInfoString = @"http://learn.tsinghua.edu.cn/MultiLanguage
     self.urlResponse = response;
     self.timeFrom = [NSDate date];
     
-    //determine the file type
-    NSLog(@"file type:%@",[response suggestedFilename]);
-    if ([[response suggestedFilename] rangeOfString:@"."].location != NSNotFound) {
-        NSMutableDictionary *fileTypeDictionary = [[NSMutableDictionary alloc] initWithCapacity:1];
-        NSArray *tempArray = [[response suggestedFilename] componentsSeparatedByString:@"."];
-        if ([[tempArray objectAtIndex:1] isEqual:@"pdf"]) {
-            [fileTypeDictionary setObject:@"pdf" forKey:@"FILE_TYPE"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"GET_FILE_TYPE" object:nil userInfo:fileTypeDictionary];
-        } else if ([[tempArray objectAtIndex:1] isEqual:@"doc"] || [[tempArray objectAtIndex:1] isEqual:@"docx"]) {
-            [fileTypeDictionary setObject:@"doc" forKey:@"FILE_TYPE"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"GET_FILE_TYPE" object:nil userInfo:fileTypeDictionary];        
-        } else if ([[tempArray objectAtIndex:1] isEqual:@"ppt"] || [[tempArray objectAtIndex:1] isEqual:@"pptx"]) {
-            [fileTypeDictionary setObject:@"ppt" forKey:@"FILE_TYPE"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"GET_FILE_TYPE" object:nil userInfo:fileTypeDictionary];      
-        } else if ([[tempArray objectAtIndex:1] isEqual:@"xls"] || [[tempArray objectAtIndex:1] isEqual:@"xlsx"]) {
-            [fileTypeDictionary setObject:@"xls" forKey:@"FILE_TYPE"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"GET_FILE_TYPE" object:nil userInfo:fileTypeDictionary];   
-        } else {
-            //common html file that don`t need to be read or stored
-            NSLog(@"the file is not a readable file");
-        }
+    NSString *suggestedExtension = [response suggestedFilename].pathExtension;
+    if ([suggestedExtension isEqualToString:@"jsp"] == NO && suggestedExtension != nil) 
+    {
+        [delegate downloadConnection:connection fileExtension:suggestedExtension];
+        //NSDictionary *extensionDict = [NSDictionary dictionaryWithObject:suggestedExtension forKey:@"fileExtesion"];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:thuFileExtensionNotification object:nil userInfo:extensionDict];
     }
     
     if ([lastRequestType isEqualToString:thuFileDownloadRequest]) {

@@ -19,7 +19,9 @@
 {
     NSString *lastFileName;
     NSString *lastCourseName;
+    NSString *lastFileExtension;
     float downloadProgress;
+    float downloadRate;
 }
 
 // downloadProgress
@@ -32,6 +34,7 @@
 // @since 1.4
 @property (strong, nonatomic) NSString *lastFileName;
 @property (strong, nonatomic) NSString *lastCourseName;
+@property (strong, nonatomic) NSString *lastFileExtension;
 
 // @since 1.4
 + (THUDownloadManager *)sharedManager;
