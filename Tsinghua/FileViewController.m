@@ -21,6 +21,8 @@
     // Load the data source
     [self reloadDataSource];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self.mainTableView selector:@selector(reload) name:@"COUNT_SUCCESSFULLY" object:nil];
+    
     [super viewDidLoad];
 }
 
@@ -49,6 +51,11 @@
 {
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
     cell.textLabel.text = [self.courseNameArray objectAtIndex:indexPath.row];
+    if ([CourseInfo sharedCourseInfo].fileCount.count != 0) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"公告数目: %@", [[CourseInfo sharedCourseInfo].fileCount objectAtIndex:indexPath.row]];
+    } else {
+        cell.detailTextLabel.text = @"正在更新数据...";
+    }
 }
 
 #pragma mark - Table view delegate

@@ -9,6 +9,13 @@
 #import "HomeworkViewController.h"
 #import "HomeworkListViewController.h"
 #import "THUNotifications.h"
+#import "TFHpple.h"
+
+@interface HomeworkViewController (Private)
+
+- (void)getNotesAndFileCount;
+
+@end
 
 @implementation HomeworkViewController
 
@@ -39,7 +46,68 @@
     if (sum > 0) {
         [[self.tabBarController.tabBar.items objectAtIndex:0] setBadgeValue:[NSString stringWithFormat:@"%d", sum]];
     }
+    
+    [self performSelectorInBackground:@selector(getNotesAndFileCount) withObject:nil];
+    
 }
+
+- (void)getNotesAndFileCount {
+    NSMutableArray *noteCounterArray = [[NSMutableArray alloc] init];
+    NSString *requestURL;    
+    int courseIndex = 0;
+    for (int i = 0; i < courseNameArray.count; i++) {
+        requestURL = [self requestStringByReplacing:@"/lesson/student/course_locate.jsp" 
+                                         withString:@"/public/bbs/getnoteid_student.jsp" 
+                                            atIndex:i];
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:requestURL]];
+        
+        TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
+        
+        //get note basic info
+        NSArray *elements  = [xpathParser searchWithXPathQuery:@"//table[1]/tr/td/a"];
+        [noteCounterArray insertObject:[NSNumber numberWithInt:[elements count]] atIndex:courseIndex];
+        courseIndex++;
+    }
+    [[CourseInfo sharedCourseInfo] setNotesCount:noteCounterArray];
+
+    NSMutableArray *fileCountArray = [[NSMutableArray alloc] init];
+    courseIndex = 0;
+    TFHppleElement *element;
+    NSRange range;
+    int tempFileCount;
+    for (int i = 0; i < courseNameArray.count; i++) {
+        requestURL = [self requestStringByReplacing:@"/lesson/student/course_locate.jsp" 
+                                         withString:@"/lesson/student/download.jsp" 
+                                            atIndex:i];
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:requestURL]];
+        TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
+        NSArray *elements  = [xpathParser searchWithXPathQuery:@"//table[1]/tr/td/a"];
+        NSUInteger length = [elements count];
+        NSUInteger serialNumber = 0;
+        tempFileCount = 0;
+        for (NSUInteger j = 0; j < length; j++) {
+            element = (TFHppleElement *)[elements objectAtIndex:j];
+            range = [[element content] rangeOfString:@"序"];
+            if (range.location == 0 && [element content] != NULL) {
+                serialNumber += 1;
+                if (serialNumber ==3) {
+                    break;
+                }
+            }
+            if (j > 3) {
+                tempFileCount++;
+            }
+        }
+        [fileCountArray insertObject:[NSNumber numberWithInt:tempFileCount] atIndex:courseIndex];
+        courseIndex++;
+    }
+    [[CourseInfo sharedCourseInfo] setFileCount:fileCountArray];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"COUNT_SUCCESSFULLY" object:nil];
+    
+    NSLog(@"count successfully");
+}
+
 
 - (void)viewDidAppear:(BOOL)animated 
 {

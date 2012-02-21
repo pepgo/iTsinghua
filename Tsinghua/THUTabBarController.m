@@ -27,13 +27,13 @@
         homeworkNavController.title = nil;
         homeworkNavController.tabBarItem.image = [UIImage imageNamed:@"tab_1.png"];
         
-        NotesViewController *noteViewController = [[NotesViewController alloc] init];
+        NotesViewController *noteViewController = [[NotesViewController alloc] initWithCellStyle:UITableViewCellStyleSubtitle];
         noteViewController.title = @"公告";
         UINavigationController *noteNavController = [[UINavigationController alloc] initWithRootViewController:noteViewController];
         noteNavController.title = nil;
         noteNavController.tabBarItem.image = [UIImage imageNamed:@"tab_2.png"];
         
-        FileViewController *fileViewController = [[FileViewController alloc] init];
+        FileViewController *fileViewController = [[FileViewController alloc] initWithCellStyle:UITableViewCellStyleSubtitle];
         fileViewController.title = @"课件";
         UINavigationController *fileNavController = [[UINavigationController alloc] initWithRootViewController:fileViewController];
         fileNavController.title = nil;

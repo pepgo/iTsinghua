@@ -8,6 +8,13 @@
 
 #import "NotesViewController.h"
 #import "NoteListViewController.h"
+#import "TFHpple.h"
+
+@interface NotesViewController (Private)
+
+- (void)getNotesCount;
+
+@end
 
 @implementation NotesViewController
 
@@ -21,9 +28,15 @@
     // Load the data source
     [self reloadDataSource];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self.mainTableView selector:@selector(reload) name:@"COUNT_SUCCESSFULLY" object:nil];
+     
     [super viewDidLoad];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self.mainTableView setDataSource:self];
+    [self.mainTableView setDelegate:self];
+}
 
 - (void)reloadDataSource
 {
@@ -47,11 +60,32 @@
 
 #pragma mark - Table view data source
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    }
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
+    cell.textLabel.text = [self.courseNameArray objectAtIndex:indexPath.row];
+    cell.detailTextLabel.text = @"hello";
+    if ([CourseInfo sharedCourseInfo].notesCount.count != 0) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"公告数目: %@", [[CourseInfo sharedCourseInfo].notesCount objectAtIndex:indexPath.row]];
+    } else {
+        cell.detailTextLabel.text = @"正在更新数据...";
+    }
+    return cell;
+}
+
+/*- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
     cell.textLabel.text = [self.courseNameArray objectAtIndex:indexPath.row];
-}
+    cell.detailTextLabel.text = @"hello";
+   if (self.noteCounterArray.count != 0) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"公告数目: %@", [self.noteCounterArray objectAtIndex:indexPath.row]];
+
+    }
+}*/
 
 #pragma mark - Table view delegate
 

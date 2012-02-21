@@ -207,23 +207,26 @@
 
 -(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration 
 {
-    if (UIInterfaceOrientationIsPortrait(orientation)) 
-    {
-        [[NSBundle mainBundle] loadNibNamed:@"LoginViewController_iPad" owner:self options:nil];
-        if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
-            self.view.transform = CGAffineTransformMakeRotation(M_PI);
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        if (UIInterfaceOrientationIsPortrait(orientation)) 
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"LoginViewController_iPad" owner:self options:nil];
+            if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
+                self.view.transform = CGAffineTransformMakeRotation(M_PI);
+            }
+            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg2_iPad.png"]];
+        } 
+        else if (UIInterfaceOrientationIsLandscape(orientation))
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"LoginViewController_iPad_land" owner:self options:nil];
+            if (orientation == UIInterfaceOrientationLandscapeLeft) {
+                self.view.transform = CGAffineTransformMakeRotation(2 * M_PI);
+            } else {
+                self.view.transform = CGAffineTransformMakeRotation(- 2 * M_PI);
+            }
+            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg1_iPad.png"]];
         }
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg2_iPad.png"]];
-    } 
-    else if (UIInterfaceOrientationIsLandscape(orientation))
-    {
-        [[NSBundle mainBundle] loadNibNamed:@"LoginViewController_iPad_land" owner:self options:nil];
-        if (orientation == UIInterfaceOrientationLandscapeLeft) {
-            self.view.transform = CGAffineTransformMakeRotation(M_PI + M_PI/2);
-        } else {
-            self.view.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg1_iPad.png"]];
     }
 }
 
@@ -240,12 +243,14 @@
 {
     [super viewWillDisappear:animated];
     [self textFieldDidEndEditing];
+    [self.navigationController.navigationBar setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self loadUserAccount];
     [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setHidden:YES];
 }
 
 #pragma mark - Public Functions

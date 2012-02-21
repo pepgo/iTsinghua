@@ -209,4 +209,9 @@
     }
 }
 
+- (void)reloadMainTableView {
+    [self.mainTableView reloadData];
+    [self.mainTableView setNeedsDisplay];
+}
+
 @end

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "THUViewController.h"
 
-@interface NotesViewController : THUViewController 
+@interface NotesViewController : THUViewController  
+
 @end

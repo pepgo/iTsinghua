@@ -28,6 +28,8 @@
 @synthesize fileUpdateInfo;
 @synthesize fileDescreitionInfo;
 @synthesize fileLinkURLInfo;
+@synthesize notesCount;
+@synthesize fileCount;
 
 - (id)init 
 {
@@ -39,6 +41,8 @@
         self.fileSizeInfo = [[NSMutableArray alloc] init];
         self.fileUpdateInfo = [[NSMutableArray alloc] init];
         self.fileLinkURLInfo = [[NSMutableArray alloc] init];
+        self.notesCount = [[NSMutableArray alloc] init];
+        self.fileCount = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -75,6 +79,8 @@
     self.fileSizeInfo = nil;
     self.fileUpdateInfo = nil;
     self.fileLinkURLInfo = nil;
+    self.notesCount = nil;
+    self.fileCount = nil;
     
     NSLog(@"Clear up all the previous course info.");
 }
