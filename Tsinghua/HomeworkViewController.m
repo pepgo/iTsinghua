@@ -51,6 +51,11 @@
     
 }
 
+
+//the method is used to check whether there is any new note or file in each course
+//it will be invoke in the background thread while the homeWorkViewController has been loaded
+//I blank this method since I have some problem about [reloadData] method in the fileViewController
+//and NotesViewController. I will fix this problem in the nect version
 - (void)getNotesAndFileCount {
     NSMutableArray *noteCounterArray = [[NSMutableArray alloc] init];
     NSString *requestURL;    
