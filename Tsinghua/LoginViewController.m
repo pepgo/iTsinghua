@@ -140,14 +140,14 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
     {
         if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg2_iPad.png"]];
+//            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg2_iPad.png"]];
         } else {
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg1_iPad.png"]];
+//            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg1_iPad.png"]];
         }
     } 
     else 
     {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_bg.png"]];
+//        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_bg.png"]];
     }
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasShownHelpView"]) 
@@ -215,7 +215,7 @@
             if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
                 self.view.transform = CGAffineTransformMakeRotation(M_PI);
             }
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg2_iPad.png"]];
+//            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg2_iPad.png"]];
         } 
         else if (UIInterfaceOrientationIsLandscape(orientation))
         {
@@ -225,7 +225,7 @@
             } else {
                 self.view.transform = CGAffineTransformMakeRotation(- 2 * M_PI);
             }
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg1_iPad.png"]];
+//            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipadlogin_bg1_iPad.png"]];
         }
     }
 }
@@ -243,6 +243,7 @@
 {
     [super viewWillDisappear:animated];
     [self textFieldDidEndEditing];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     [self.navigationController.navigationBar setHidden:YES];
 }
 
@@ -250,6 +251,8 @@
 {
     [self loadUserAccount];
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
     [self.navigationController.navigationBar setHidden:YES];
 }
 

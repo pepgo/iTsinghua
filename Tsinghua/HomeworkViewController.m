@@ -47,7 +47,8 @@
         [[self.tabBarController.tabBar.items objectAtIndex:0] setBadgeValue:[NSString stringWithFormat:@"%d", sum]];
     }
     
-    [self performSelectorInBackground:@selector(getNotesAndFileCount) withObject:nil];
+//    the [getNotesAndFileCount] method which will running in the background
+//    [self performSelectorInBackground:@selector(getNotesAndFileCount) withObject:nil];
     
 }
 
@@ -179,5 +180,7 @@
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+
 
 @end

@@ -12,7 +12,7 @@
 @implementation FileViewController
 
 #pragma mark - View lifecycle
-
+//[getNewInfo] method will not be invoke in this version
 - (void)getNewInfo {
     [self.mainTableView reloadData];
     int old = 0;
@@ -86,11 +86,12 @@
 {
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
     cell.textLabel.text = [self.courseNameArray objectAtIndex:indexPath.row];
-    if ([CourseInfo sharedCourseInfo].fileCount.count != 0) {
+    
+    /*if ([CourseInfo sharedCourseInfo].fileCount.count != 0) {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"课件数目: %@", [[CourseInfo sharedCourseInfo].fileCount objectAtIndex:indexPath.row]];
     } else {
         cell.detailTextLabel.text = @"正在更新数据...";
-    }
+    }*/
 }
 
 #pragma mark - Table view delegate
