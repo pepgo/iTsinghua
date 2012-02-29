@@ -26,11 +26,18 @@
     THUTabBarController *thuRootViewController = [[THUTabBarController alloc] init];
     [QLoadingView hideWithAnimated:NO];
     
-    [UIView beginAnimations:nil context:UIGraphicsGetCurrentContext()];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navController.view cache:YES];
-    [UIView setAnimationDuration:0.6];
-    [self.navController pushViewController:thuRootViewController animated:YES];
-    [UIView commitAnimations];
+//    [UIView beginAnimations:nil context:UIGraphicsGetCurrentContext()];
+//    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navController.view cache:YES];
+//    [UIView setAnimationDuration:0.6];
+//    [self.navController pushViewController:thuRootViewController animated:YES];
+//    [UIView commitAnimations];
+    
+    CATransition *fadeTransition = [CATransition animation];
+    fadeTransition.duration = 1.0f;
+    fadeTransition.type = kCATransitionFade;
+    fadeTransition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];// kCAMediaTimingFunctionEaseIn];
+    [self.navController.view.layer addAnimation:fadeTransition forKey:@"fadeTransition"];
+    [self.navController pushViewController:thuRootViewController animated:NO];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

@@ -47,10 +47,16 @@
         [[self.tabBarController.tabBar.items objectAtIndex:0] setBadgeValue:[NSString stringWithFormat:@"%d", sum]];
     }
     
-    [self performSelectorInBackground:@selector(getNotesAndFileCount) withObject:nil];
+//    the [getNotesAndFileCount] method which will running in the background
+//    [self performSelectorInBackground:@selector(getNotesAndFileCount) withObject:nil];
     
 }
 
+
+//the method is used to check whether there is any new note or file in each course
+//it will be invoke in the background thread while the homeWorkViewController has been loaded
+//I blank this method since I have some problem about [reloadData] method in the fileViewController
+//and NotesViewController. I will fix this problem in the nect version
 - (void)getNotesAndFileCount {
     NSMutableArray *noteCounterArray = [[NSMutableArray alloc] init];
     NSString *requestURL;    
@@ -174,5 +180,7 @@
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+
 
 @end

@@ -144,9 +144,15 @@
     return 1;
 }
 
+//if the user have no course then it will not show any info
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.courseNameArray count];
+    if ([self haveCourse]) {
+        return [self.courseNameArray count];
+
+    } else {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -173,7 +179,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
 }
 
 #pragma mark - UIActionSheet Delegate
@@ -217,6 +222,10 @@
 
 - (void)getNewInfo {
     
+}
+
+- (BOOL)haveCourse {
+    return [[CourseInfo sharedCourseInfo] courseName].count > 0 ? YES:NO;
 }
 
 @end

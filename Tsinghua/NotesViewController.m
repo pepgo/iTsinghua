@@ -19,7 +19,7 @@
 @implementation NotesViewController
 
 #pragma mark - View lifecycle
-
+//[getNewInfo] method will not be invoke in this version
 - (void)getNewInfo {
     [self.mainTableView reloadData];
     int old = 0;
@@ -104,12 +104,14 @@
     }
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
     cell.textLabel.text = [self.courseNameArray objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = @"hello";
-    if ([CourseInfo sharedCourseInfo].notesCount.count != 0) {
+//    cell.detailTextLabel.text = @"hello";
+    
+    /*if ([CourseInfo sharedCourseInfo].notesCount.count != 0) {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"公告数目: %@", [[CourseInfo sharedCourseInfo].notesCount objectAtIndex:indexPath.row]];
     } else {
         cell.detailTextLabel.text = @"正在更新数据...";
-    }
+    }*/
+    
     return cell;
 }
 
