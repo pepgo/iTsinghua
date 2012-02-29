@@ -133,6 +133,7 @@
                                              initWithCourseName:self.courseName fileName:fileName fileType:fileType index:indexPath.row exist:fileExist];
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 @end

@@ -34,6 +34,7 @@
     NSMutableArray *fileSizeInfo;
     NSMutableArray *fileDescreitionInfo;
     NSMutableArray *fileUpdateInfo;
+    NSMutableArray *notesCount;
 }
 
 @property (strong, nonatomic) NSArray *courseName;
@@ -54,6 +55,8 @@
 @property (strong, nonatomic) NSMutableArray *fileDescreitionInfo;
 @property (strong, nonatomic) NSMutableArray *fileUpdateInfo;
 @property (strong, nonatomic) NSMutableArray *fileLinkURLInfo;
+@property (strong, nonatomic) NSMutableArray *notesCount;
+@property (strong, nonatomic) NSMutableArray *fileCount;
 
 // @since 1.0.0
 + (CourseInfo *)sharedCourseInfo;

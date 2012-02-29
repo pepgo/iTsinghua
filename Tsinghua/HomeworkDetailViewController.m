@@ -76,12 +76,23 @@ static NSString *baseString = @"http://learn.tsinghua.edu.cn/MultiLanguage/lesso
 
 #pragma mark - View lifecycle
 
+- (void)viewWillAppear:(BOOL)animated {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [[NSBundle mainBundle] loadNibNamed:@"HomeworkDetailViewController_iPad" owner:self options:nil];
+    } else {
+        [[NSBundle mainBundle] loadNibNamed:@"HomeworkDetailViewController_iPhone" owner:self options:nil];
+    }
+    
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     // Generate the request url string
     NSString *homeworkDetailURL = [[CourseInfo sharedCourseInfo].homeworkDetailURL objectAtIndex:selectedIndex];
     NSString *requestURL = [NSString stringWithFormat:@"%@%@", baseString, homeworkDetailURL];
     [self requestDidStartOfType:thuHomeworkDetailRequest url:requestURL];
+    NSLog(@"%@",requestURL);
     
     deadlineString = [deadline text];
     headString = [header text];
