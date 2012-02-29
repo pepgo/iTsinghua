@@ -35,6 +35,7 @@
 {
     if (self = [super init]) {
         self.cellStyle = cStyle;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewInfo) name:@"COUNT_SUCCESSFULLY" object:nil];
     }
     return self;
 }
@@ -212,6 +213,10 @@
 - (void)reloadMainTableView {
     [self.mainTableView reloadData];
     [self.mainTableView setNeedsDisplay];
+}
+
+- (void)getNewInfo {
+    
 }
 
 @end

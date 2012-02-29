@@ -13,6 +13,42 @@
 
 #pragma mark - View lifecycle
 
+- (void)getNewInfo {
+    [self.mainTableView reloadData];
+    int old = 0;
+    int new = 0;
+    int value;
+    
+    //get old count
+    for (int i = 0; i < courseNameArray.count; i++) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"File-%@",[courseNameArray objectAtIndex:i]]]) {
+            value = [(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"File-%@",[courseNameArray objectAtIndex:i]]] intValue];
+            old = old + value;
+        } else {
+            old = 0;
+        }
+    }
+    
+    //get new count
+    //载入过快这里会崩溃，需要加一层判断
+    if ([CourseInfo sharedCourseInfo].fileCount.count > 0) {
+        for (int i = 0; i < courseNameArray.count; i++) {
+            value = [(NSNumber *)[[CourseInfo sharedCourseInfo].fileCount objectAtIndex:i] intValue];
+            new = new + value;
+        } 
+    } else {
+        return;
+    }
+    
+    if ((new - old) > 0) {
+        [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:@"New"];
+    }    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self getNewInfo];
+}
+
 - (void)viewDidLoad
 {
     // Add the refresh button
@@ -21,7 +57,6 @@
     // Load the data source
     [self reloadDataSource];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self.mainTableView selector:@selector(reload) name:@"COUNT_SUCCESSFULLY" object:nil];
     
     [super viewDidLoad];
 }
@@ -52,7 +87,7 @@
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
     cell.textLabel.text = [self.courseNameArray objectAtIndex:indexPath.row];
     if ([CourseInfo sharedCourseInfo].fileCount.count != 0) {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"公告数目: %@", [[CourseInfo sharedCourseInfo].fileCount objectAtIndex:indexPath.row]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"课件数目: %@", [[CourseInfo sharedCourseInfo].fileCount objectAtIndex:indexPath.row]];
     } else {
         cell.detailTextLabel.text = @"正在更新数据...";
     }

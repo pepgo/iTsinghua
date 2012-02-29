@@ -136,5 +136,6 @@ static NSString *baseRequestURL = @"http://learn.tsinghua.edu.cn";
 //over write the method of defining cell`s height
 
 - (void)reloadMainTableView;
+- (void)getNewInfo;
 
 @end

@@ -94,6 +94,7 @@ static NSString *noteBaseURL = @"http://learn.tsinghua.edu.cn/MultiLanguage/publ
     NoteDetailViewController *controller = [[NoteDetailViewController alloc] initWithURLString:urlString];
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 @end

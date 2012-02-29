@@ -20,6 +20,44 @@
 
 #pragma mark - View lifecycle
 
+- (void)getNewInfo {
+    [self.mainTableView reloadData];
+    int old = 0;
+    int new = 0;
+    int value;
+    
+    //get old count
+    for (int i = 0; i < courseNameArray.count; i++) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"Note-%@",[courseNameArray objectAtIndex:i]]]) {
+            value = [[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"Note-%@",[courseNameArray objectAtIndex:i]]] intValue];
+            old = old + value;
+        } else {
+            old = 0;
+        }
+        NSLog(@"%d",[[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"Note-%@",[courseNameArray objectAtIndex:i]]] intValue]);
+        NSLog(@"%@",[NSString stringWithFormat:@"Note-%@",[courseNameArray objectAtIndex:i]]);
+        NSLog(@"value:%d",value);
+    }
+    
+    //get new count
+    if ([CourseInfo sharedCourseInfo].notesCount.count > 0) {
+        for (int i = 0; i < courseNameArray.count; i++) {
+            value = [(NSNumber *)[[CourseInfo sharedCourseInfo].notesCount objectAtIndex:i] intValue];
+            new = new + value;
+            NSLog(@"value:%d",value);
+        }
+    } else {
+        return;
+    }
+    
+    NSLog(@"old:%d",old);
+    NSLog(@"new:%d",new);
+    
+    if ((new - old) > 0) {
+        [[self.tabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@"New"];
+    }
+}
+
 - (void)viewDidLoad
 {
     // Add the refresh button
@@ -28,14 +66,13 @@
     // Load the data source
     [self reloadDataSource];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self.mainTableView selector:@selector(reload) name:@"COUNT_SUCCESSFULLY" object:nil];
-     
     [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.mainTableView setDataSource:self];
     [self.mainTableView setDelegate:self];
+    [self getNewInfo];
 }
 
 - (void)reloadDataSource

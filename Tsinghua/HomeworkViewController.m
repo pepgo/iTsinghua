@@ -105,7 +105,25 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"COUNT_SUCCESSFULLY" object:nil];
     
+    for (int i = 0; i < courseNameArray.count; i++) {
+        [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%@",[noteCounterArray objectAtIndex:i]] forKey:[NSString stringWithFormat:@"Note-%@",[courseNameArray objectAtIndex:i]]];
+        NSLog(@"note count:%@",[noteCounterArray objectAtIndex:i]);
+        NSLog(@"note:%@",[NSString stringWithFormat:@"%@",[noteCounterArray objectAtIndex:i]]);
+        [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%@",[fileCountArray objectAtIndex:i]] forKey:[NSString stringWithFormat:@"File-%@",[courseNameArray objectAtIndex:i]]];
+    }
+    
     NSLog(@"count successfully");
+    
+    if (noteCounterArray.count > 0) {
+        [[self.tabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@"New"];
+    }
+    if (fileCountArray.count > 0) {
+        [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:@"New"];
+    }
+    if (noteCounterArray.count > 0) {
+        [NSThread exit];
+    }
+    
 }
 
 
