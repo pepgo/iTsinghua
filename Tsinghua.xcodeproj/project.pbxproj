@@ -92,8 +92,6 @@
 		DD5F11AB149E7ACA00685E11 /* bismarrck.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5F11A8149E7AC300685E11 /* bismarrck.png */; };
 		DD5F11AC149E7ACA00685E11 /* lois.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5F11A9149E7AC500685E11 /* lois.png */; };
 		DD5F11AD149E7ACA00685E11 /* pepgo.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5F11AA149E7AC700685E11 /* pepgo.png */; };
-		DD6106B5149F1387002085C2 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DD6106B4149F1387002085C2 /* icon.png */; };
-		DD6106BA149F2694002085C2 /* icon_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = DD6106B9149F2693002085C2 /* icon_iPad.png */; };
 		DD6F35D314533E12003B835C /* HomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6F35D114533E12003B835C /* HomeworkViewController.m */; };
 		DD6F35D414533E12003B835C /* HomeworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD6F35D214533E12003B835C /* HomeworkViewController.xib */; };
 		DD6F35D814533E25003B835C /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6F35D614533E25003B835C /* NotesViewController.m */; };
@@ -113,6 +111,9 @@
 		DD6F361014539460003B835C /* HomeworkDetailViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD6F360E14539460003B835C /* HomeworkDetailViewController_iPhone.xib */; };
 		DD6F36151453B165003B835C /* NoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6F36131453B165003B835C /* NoteDetailViewController.m */; };
 		DD6F36161453B165003B835C /* NoteDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD6F36141453B165003B835C /* NoteDetailViewController.xib */; };
+		DD82B1A214FDD68F00351EDA /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD82B1A114FDD68F00351EDA /* icon@2x.png */; };
+		DD82B1A314FDD69400351EDA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DD6106B4149F1387002085C2 /* icon.png */; };
+		DD82B1A514FDD6A200351EDA /* icon_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = DD82B1A414FDD6A100351EDA /* icon_iPad.png */; };
 		DDBACD4C149F028900831358 /* slide1.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBACD4B149F028900831358 /* slide1.png */; };
 		DDBF529514905337006E0C91 /* LoginViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDBF529414905337006E0C91 /* LoginViewController_iPad.xib */; };
 		DDBF529714907EC5006E0C91 /* HomeworkDetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDBF529614907EC5006E0C91 /* HomeworkDetailViewController_iPad.xib */; };
@@ -242,7 +243,6 @@
 		DD5F11A9149E7AC500685E11 /* lois.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lois.png; sourceTree = "<group>"; };
 		DD5F11AA149E7AC700685E11 /* pepgo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pepgo.png; sourceTree = "<group>"; };
 		DD6106B4149F1387002085C2 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
-		DD6106B9149F2693002085C2 /* icon_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_iPad.png; sourceTree = "<group>"; };
 		DD6F35D014533E12003B835C /* HomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeworkViewController.h; sourceTree = "<group>"; };
 		DD6F35D114533E12003B835C /* HomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeworkViewController.m; sourceTree = "<group>"; };
 		DD6F35D214533E12003B835C /* HomeworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeworkViewController.xib; sourceTree = "<group>"; };
@@ -273,6 +273,8 @@
 		DD6F36121453B165003B835C /* NoteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDetailViewController.h; sourceTree = "<group>"; };
 		DD6F36131453B165003B835C /* NoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailViewController.m; sourceTree = "<group>"; };
 		DD6F36141453B165003B835C /* NoteDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteDetailViewController.xib; sourceTree = "<group>"; };
+		DD82B1A114FDD68F00351EDA /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		DD82B1A414FDD6A100351EDA /* icon_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_iPad.png; sourceTree = "<group>"; };
 		DDBACD4B149F028900831358 /* slide1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slide1.png; sourceTree = "<group>"; };
 		DDBF529414905337006E0C91 /* LoginViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController_iPad.xib; sourceTree = "<group>"; };
 		DDBF529614907EC5006E0C91 /* HomeworkDetailViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeworkDetailViewController_iPad.xib; sourceTree = "<group>"; };
@@ -371,7 +373,8 @@
 		DD4F053A1451DAFD000FBD02 = {
 			isa = PBXGroup;
 			children = (
-				DD6106B9149F2693002085C2 /* icon_iPad.png */,
+				DD82B1A414FDD6A100351EDA /* icon_iPad.png */,
+				DD82B1A114FDD68F00351EDA /* icon@2x.png */,
 				DD4F054F1451DAFD000FBD02 /* Tsinghua */,
 				DD4F05671451DAFD000FBD02 /* TsinghuaTests */,
 				DD4F05481451DAFD000FBD02 /* Frameworks */,
@@ -842,8 +845,9 @@
 				DD5F11AC149E7ACA00685E11 /* lois.png in Resources */,
 				DD5F11AD149E7ACA00685E11 /* pepgo.png in Resources */,
 				DDBACD4C149F028900831358 /* slide1.png in Resources */,
-				DD6106B5149F1387002085C2 /* icon.png in Resources */,
-				DD6106BA149F2694002085C2 /* icon_iPad.png in Resources */,
+				DD82B1A214FDD68F00351EDA /* icon@2x.png in Resources */,
+				DD82B1A314FDD69400351EDA /* icon.png in Resources */,
+				DD82B1A514FDD6A200351EDA /* icon_iPad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -974,6 +978,11 @@
 		DD13DE61145D37BE00315933 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tsinghua/Tsinghua-Prefix.pch";
 				INFOPLIST_FILE = "Tsinghua/Tsinghua-Info.plist";
@@ -1061,6 +1070,11 @@
 		DD4F05731451DAFD000FBD02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tsinghua/Tsinghua-Prefix.pch";
 				INFOPLIST_FILE = "Tsinghua/Tsinghua-Info.plist";
@@ -1074,6 +1088,11 @@
 		DD4F05741451DAFD000FBD02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tsinghua/Tsinghua-Prefix.pch";
 				INFOPLIST_FILE = "Tsinghua/Tsinghua-Info.plist";
@@ -1137,8 +1156,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
-				PROVISIONING_PROFILE = "EA3CD26C-9B87-40C1-8BEF-11817F62DA43";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EA3CD26C-9B87-40C1-8BEF-11817F62DA43";
+				PROVISIONING_PROFILE = "A82DC694-1569-49E9-8793-FFBE778BF1DD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A82DC694-1569-49E9-8793-FFBE778BF1DD";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1147,6 +1166,11 @@
 		DD6106B7149F1423002085C2 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tsinghua/Tsinghua-Prefix.pch";
 				INFOPLIST_FILE = "Tsinghua/Tsinghua-Info.plist";
