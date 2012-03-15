@@ -49,7 +49,8 @@ static NSString *PDFHeaderString = @"<25504446>";
 
 // Initializer:
 // @since 1.4
-- (id)initWithCourseName:(NSString *)courseName fileName:(NSString *)fileName fileType:(NSString *)type index:(NSInteger)index exist:(BOOL)exist;
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle CourseName:(NSString *)course fileName:(NSString *)file 
+             fileType:(NSString *)type index:(NSInteger)sIndex exist:(BOOL)exist;
 
 // Function:
 // type:MIMEType for the file.

@@ -27,8 +27,15 @@
 {
     if (fileListArray == nil) 
     {
-        NSString *requestURL = [self requestStringByReplacing:@"/lesson/student/course_locate.jsp" 
-                                                   withString:@"/lesson/student/download.jsp" atIndex:self.selectedIndex];
+        NSString *requestURL;
+        if ([[THUNetworkManager sharedManager] isTeacher]) {
+            requestURL = [self requestStringByReplacing:@"/lesson/teacher/course_locate.jsp?" 
+                                                       withString:@"/lesson/teacher/download.jsp?module_id=121&" atIndex:self.selectedIndex];
+        } else {
+            requestURL = [self requestStringByReplacing:@"/lesson/student/course_locate.jsp" 
+                                             withString:@"/lesson/student/download.jsp" atIndex:self.selectedIndex];
+        }
+                
         // Clear up the former stored file data
         [[CourseInfo sharedCourseInfo].fileListInfo removeAllObjects];
         
@@ -129,11 +136,9 @@
     NSString *fileType = [[THUFileManager defaultManager] extensionForFile:fileName course:self.courseName];
     BOOL fileExist = fileType == nil ? NO : YES;
     
-    FileContentViewController *controller = [[FileContentViewController alloc] 
-                                             initWithCourseName:self.courseName fileName:fileName fileType:fileType index:indexPath.row exist:fileExist];
+    FileContentViewController *controller = [[FileContentViewController alloc] initWithNibName:@"FileContentViewController" bundle:nil CourseName:self.courseName fileName:fileName fileType:fileType index:indexPath.row exist:fileExist];
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
 @end

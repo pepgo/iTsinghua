@@ -138,6 +138,9 @@
     [super viewDidAppear:animated];
     
     // Send the request to get all the course info
+    
+    
+    
     if ([CourseInfo sharedCourseInfo].courseName.count == 0) {
         [self requestDidStartOfType:thuCourseRequest url:nil];
     }
@@ -169,7 +172,11 @@
     
     // Set the label text
     cell.textLabel.text = [self.courseNameArray objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"未交作业数目: %@", [self.countOfUnhandledHomeworks objectAtIndex:indexPath.row]];
+    if ([[THUNetworkManager sharedManager] isTeacher]) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"批改中的作业: %@", [self.countOfUnhandledHomeworks objectAtIndex:indexPath.row]];
+    } else {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"未交作业数目: %@", [self.countOfUnhandledHomeworks objectAtIndex:indexPath.row]];
+    }
 }
 
 #pragma mark - Table view delegate

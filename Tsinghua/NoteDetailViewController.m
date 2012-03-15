@@ -8,6 +8,7 @@
 
 #import "NoteDetailViewController.h"
 #import "THUNetworkManager.h"
+#import "QLoadingView.h"
 
 @implementation NoteDetailViewController
 
@@ -54,12 +55,12 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    //
+    [QLoadingView showWithInfo:@"正在载入公告..."];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    // 
+    [QLoadingView hideWithAnimated:YES];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error

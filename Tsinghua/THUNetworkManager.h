@@ -67,6 +67,9 @@ static NSString *thuFileDownloadRequest = @"thuFileDownloadRequest";
     NSMutableData *urlResponseData;
     NSNumber *expectedLength;
     id <THUNetworkManagerDownloadDelegate> delegate;
+    
+    int checkTeacher;
+    BOOL whetherTeacher;
 }
 
 // @since 1.0
@@ -81,6 +84,8 @@ static NSString *thuFileDownloadRequest = @"thuFileDownloadRequest";
 // @since 1.4
 @property (strong, nonatomic) id <THUNetworkManagerDownloadDelegate> delegate;
 
+@property (assign, nonatomic) BOOL whetherTeacher;
+
 // @since 1.0
 + (THUNetworkManager *)sharedManager;
 
@@ -93,6 +98,8 @@ static NSString *thuFileDownloadRequest = @"thuFileDownloadRequest";
 // Cancel current network connection if exists.
 // @since 2.1
 - (void)cancelCurrentRequest;
+
+- (BOOL)isTeacher;
 
 @end
 

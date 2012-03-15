@@ -202,6 +202,8 @@
     // Hide the navigation bar
     [self.navigationController.navigationBar setHidden:YES];
     
+//    [THUNetworkManager sharedManager].whetherTeacher = YES;
+    
     [super viewDidLoad];
 }
 

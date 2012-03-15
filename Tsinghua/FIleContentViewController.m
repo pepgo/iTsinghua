@@ -24,9 +24,10 @@
 @synthesize index;
 @synthesize fileExist;
 
-- (id)initWithCourseName:(NSString *)course fileName:(NSString *)file fileType:(NSString *)type index:(NSInteger)sIndex exist:(BOOL)exist 
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle CourseName:(NSString *)course fileName:(NSString *)file 
+             fileType:(NSString *)type index:(NSInteger)sIndex exist:(BOOL)exist 
 {
-    if (self = [super init]) 
+    if (self = [super initWithNibName:nibName bundle:nibBundle]) 
     {
         self.courseName = course;
         self.fileName = file;
@@ -151,6 +152,10 @@
     self.downloadSlider.minimumValue = 0.0f;
     self.downloadSlider.continuous = YES;
     self.downloadSlider.value = 0.0f;
+    
+    NSLog(@"view did load");
+    
+    NSLog(@"%@", self.nibName);
     
     [super viewDidLoad];
 }

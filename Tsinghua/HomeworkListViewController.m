@@ -39,7 +39,12 @@
     
     if (self.homeworkInfo == nil) {
         // Generate the request url
-        NSString *requestURL = [self requestStringByReplacing:@"course_locate" withString:@"hom_wk_brw" atIndex:selectedIndex];
+        NSString *requestURL;
+        if ([[THUNetworkManager sharedManager] isTeacher]) {
+            requestURL = [self requestStringByReplacing:@"course_locate.jsp?course_id" withString:@"hom_wk_brw.jsp?module_id=305&course_id" atIndex:selectedIndex];
+        } else {
+            requestURL = [self requestStringByReplacing:@"course_locate" withString:@"hom_wk_brw" atIndex:selectedIndex];
+        }
         [self requestDidStartOfType:thuHomeworkRequest url:requestURL];
     }
 }
@@ -71,7 +76,7 @@
     NSString *hState = [self.homeworkState objectAtIndex:indexPath.row];
     NSString *deadline = [[CourseInfo sharedCourseInfo].homeworkDeadline objectAtIndex:indexPath.row];
     cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:13.0f];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@    截止日期:%@", hState, deadline];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"作业状态:%@    截止日期:%@", hState, deadline];
 }
 
 #pragma mark - Table view delegate

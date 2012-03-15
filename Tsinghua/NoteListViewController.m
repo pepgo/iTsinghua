@@ -58,9 +58,18 @@ static NSString *noteBaseURL = @"http://learn.tsinghua.edu.cn/MultiLanguage/publ
 {
     [super viewDidAppear:animated];
     
+    NSString *requestURL;
     if (self.basicNoteInfo == nil) {
-        NSString *requestURL = [self requestStringByReplacing:@"/lesson/student/course_locate.jsp" 
-                                                   withString:@"/public/bbs/getnoteid_student.jsp" atIndex:selectedIndex];
+        if ([[THUNetworkManager sharedManager] isTeacher]) {
+            requestURL = [self requestStringByReplacing:@"/lesson/teacher/course_locate.jsp?" 
+                                             withString:@"/public/bbs/getnoteid_teacher.jsp?module_id=122&" atIndex:selectedIndex];
+        } else {
+            requestURL = [self requestStringByReplacing:@"/lesson/student/course_locate.jsp" 
+                                             withString:@"/public/bbs/getnoteid_student.jsp" atIndex:selectedIndex];
+        }
+        
+        NSLog(@"%@",requestURL);
+        
         [self requestDidStartOfType:thuNoteRequest url:requestURL];
     }
 }
