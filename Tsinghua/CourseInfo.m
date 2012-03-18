@@ -55,7 +55,6 @@
             assert(sCourseinfo != nil);
         }
     }
-    
     return sCourseinfo;
 }
 

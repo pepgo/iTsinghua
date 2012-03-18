@@ -58,13 +58,6 @@
         [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
     }
     
-    // Alloc the navigation controller
-    self.navController = [[UINavigationController alloc] init];
-    
-    // Add the navigation controller into the UIWindow view controller stack
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window addSubview:self.navController.view];
-    
     LoginViewController *loginViewController = [LoginViewController alloc];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
         if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) 
@@ -73,8 +66,17 @@
             loginViewController = [loginViewController initWithNibName:@"LoginViewController_iPad_land" bundle:nil];
         else 
             loginViewController = [loginViewController initWithNibName:@"LoginViewController_iPhone" bundle:nil];
+    
+    // Alloc the navigation controller
+    self.navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    
+    // Add the navigation controller into the UIWindow view controller stack
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window addSubview:self.navController.view];
+    
+    
     // Push to the login view
-    [self.navController pushViewController:loginViewController animated:YES];
+    //[self.navController pushViewController:loginViewController animated:YES];
     
     [self.window makeKeyAndVisible];
     

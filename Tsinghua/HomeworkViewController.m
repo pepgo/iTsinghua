@@ -10,6 +10,7 @@
 #import "HomeworkListViewController.h"
 #import "THUNotifications.h"
 #import "TFHpple.h"
+#import "THUAccountManager.h"
 
 @interface HomeworkViewController (Private)
 
@@ -129,7 +130,6 @@
     if (noteCounterArray.count > 0) {
         [NSThread exit];
     }
-    
 }
 
 
@@ -139,7 +139,7 @@
     
     // Send the request to get all the course info
     
-    
+    NSLog(@"name:%@,password:%@",[[THUAccountManager defaultManager] currentAccount],[[THUAccountManager defaultManager] currentPassword]);
     
     if ([CourseInfo sharedCourseInfo].courseName.count == 0) {
         [self requestDidStartOfType:thuCourseRequest url:nil];

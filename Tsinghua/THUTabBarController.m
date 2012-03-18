@@ -71,12 +71,15 @@
 
 - (void)logoutNotificationReceived:(NSNotification *)notification
 {
+    //clean up all the course info
+    [[CourseInfo sharedCourseInfo] clearUpCourseInfo];
+
     CATransition *fadeTransition = [CATransition animation];
     fadeTransition.duration = 0.5f;
     fadeTransition.type = kCATransitionFade;
     fadeTransition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     [self.navigationController.view.layer addAnimation:fadeTransition forKey:@"fadeTransition"];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 
