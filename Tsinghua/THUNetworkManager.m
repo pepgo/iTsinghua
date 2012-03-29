@@ -113,7 +113,7 @@ static NSString *teacherCourseInfoString = @"http://learn.tsinghua.edu.cn/MultiL
 - (void)parseLoginReturnData:(NSData *)buffer response:(NSURLResponse *)response
 {
     NSString *string = [[NSString alloc] initWithData:buffer encoding:NSUTF8StringEncoding];
-    NSLog(@"back url:%@",string);
+//    NSLog(@"back url:%@",string);
     NSScanner *theScanner;
     NSString *text = nil;
     theScanner = [NSScanner scannerWithString:string];
@@ -170,6 +170,9 @@ static NSString *teacherCourseInfoString = @"http://learn.tsinghua.edu.cn/MultiL
     if (!whetherTeacher) {   
         TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:courseInfo];
         NSArray *elements  = [xpathParser searchWithXPathQuery:@"//table[2]/tr/td/a"];
+        if ([elements count] == 0) {
+            return;
+        }
         TFHppleElement *element = [elements objectAtIndex:0];
         NSUInteger length = [elements count];
         NSString *string;

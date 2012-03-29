@@ -57,11 +57,12 @@
 //the method is used to check whether there is any new note or file in each course
 //it will be invoke in the background thread while the homeWorkViewController has been loaded
 //I blank this method since I have some problem about [reloadData] method in the fileViewController
-//and NotesViewController. I will fix this problem in the nect version
+//and NotesViewController. I will fix this problem in the next version
 - (void)getNotesAndFileCount {
     NSMutableArray *noteCounterArray = [[NSMutableArray alloc] init];
     NSString *requestURL;    
     int courseIndex = 0;
+    
     for (int i = 0; i < courseNameArray.count; i++) {
         requestURL = [self requestStringByReplacing:@"/lesson/student/course_locate.jsp" 
                                          withString:@"/public/bbs/getnoteid_student.jsp" 
@@ -166,16 +167,21 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    // Configure the cell label font
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0f];
-    
-    // Set the label text
-    cell.textLabel.text = [self.courseNameArray objectAtIndex:indexPath.row];
-    if ([[THUNetworkManager sharedManager] isTeacher]) {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"批改中的作业: %@", [self.countOfUnhandledHomeworks objectAtIndex:indexPath.row]];
+    if ([self haveCourse]) {
+        // Configure the cell label font
+        cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16.0f];
+        cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0f];
+        
+        // Set the label text
+        cell.textLabel.text = [self.courseNameArray objectAtIndex:indexPath.row];
+        if ([[THUNetworkManager sharedManager] isTeacher]) {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"批改中的作业: %@", [self.countOfUnhandledHomeworks objectAtIndex:indexPath.row]];
+        } else {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"未交作业数目: %@", [self.countOfUnhandledHomeworks objectAtIndex:indexPath.row]];
+        }
+        return;
     } else {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"未交作业数目: %@", [self.countOfUnhandledHomeworks objectAtIndex:indexPath.row]];
+        return;
     }
 }
 

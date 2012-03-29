@@ -130,10 +130,8 @@
     // The base string has two parts. The first is the base url of the thu net school.
     // The second part is the course url stored in the course info dictionary.
     NSString *baseString = [baseRequestURL stringByAppendingString:[[CourseInfo sharedCourseInfo].courseURL objectAtIndex:index]];
-    
     // Replacing some part of the string to form the correct url
     NSString *requestString = [baseString stringByReplacingOccurrencesOfString:rString withString:string];
-    
     return requestString;
 }
 
